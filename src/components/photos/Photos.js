@@ -1,58 +1,31 @@
 import React, { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+// import { useParams } from "react-router-dom"
 import PhotoItem from "./PhotoItem"
 import axios from "axios"
 import loader from "../../loader.gif"
 
 const Photos = (props) => {
-  const params = useParams()
+  // const params = useParams()
 
   const [isLoaded, setIsLoaded] = useState(false)
   const [photos, setPhotos] = useState([])
-  const [maxPages, setMaxPages] = useState(1)
-  // const [limit, setLimit] = useState(5)
+  const [limit, setLimit] = useState(20)
   const [page, setPage] = useState(1)
-  const [loadMoreBtn, setLoadMoreBtn] = useState(0)
+  const [loadMoreBtn, setLoadMoreBtn] = useState(1)
   const [status, setStatus] = useState(false)
   const [loadMoreBtnText, setLoadMoreBtnText] = useState("Load More")
   const [loadMoreBtnDisabled, setLoadMoreBtnDisabled] = useState(false)
 
-  // Test Case
-
-  // Limit
-
-  // API end Points.
-
-  // All Images.
-  // http://jsonplaceholder.typicode.com/photos
-
-  // Filtering.
-  // http://jsonplaceholder.typicode.com/photos?_limit=5&_page=6
-
-  // Albums.
-  // http://jsonplaceholder.typicode.com/albums/1/photos
-
-  // Limit For Albums.
-  // http://jsonplaceholder.typicode.com/albums/1/photos?_limit=2
-
-  // All Albums.
-  // http://jsonplaceholder.typicode.com/albums
-
-  // Single Image.
-  // http://jsonplaceholder.typicode.com/photos/7
-
   useEffect(() => {
     // GET request using axios inside useEffect React hook
 
-    // const catFilter = typeof props.catSlug !== "undefined" ? `&catslug=${props.catSlug}` : ""
-
-    // const apiLink = `/wp-json/pmapi/v1/jobs?limit=4&&page=${page}${catFilter}`
+    // setLimit(20)
     var apiLink
-    console.log(props.albumId)
-    if (typeof props.albumId !== undefined) {
-      apiLink = `http://jsonplaceholder.typicode.com/albums/8/photos?_limit=5&_page=6`
+    // console.log(props)
+    if (typeof props.albumId !== "undefined") {
+      apiLink = `http://jsonplaceholder.typicode.com/albums/${props.albumId}/photos?_limit=${limit}&_page=${page}`
     } else {
-      apiLink = `http://jsonplaceholder.typicode.com/photos?_limit=5&_page=6`
+      apiLink = `http://jsonplaceholder.typicode.com/photos?_limit=${limit}&_page=${page}`
     }
 
     const fetchData = () => {
@@ -63,7 +36,6 @@ const Photos = (props) => {
           console.log(res.data.length)
           setLoadMoreBtnText("Load More")
           setLoadMoreBtnDisabled(false)
-          setMaxPages(res.data.max_pages)
           setIsLoaded(true)
           setStatus(res.data.length > 0 ? true : false)
 
@@ -73,7 +45,7 @@ const Photos = (props) => {
           }
           // maximum number of page value is greater than 1 then we are going to show the button.
 
-          res.data.max_pages > 1 ? setLoadMoreBtn(1) : setLoadMoreBtn(0)
+          // res.data.max_pages > 1 ? setLoadMoreBtn(1) : setLoadMoreBtn(0)
 
           // setJobs(jobs.push(res.data.job_data))
           setPhotos((prev) => prev.concat(res.data))
@@ -94,18 +66,18 @@ const Photos = (props) => {
     setLoadMoreBtnText("Loading....")
     setLoadMoreBtnDisabled(true)
 
-    if (currentPage === maxPages) {
-      e.target.remove()
-    }
+    // if (currentPage === maxPages) {
+    //   e.target.remove()
+    // }
   }
 
   return (
-    <div className="container px-4 mx-auto items-center md:px-0">
+    <div className="container px-4 mx-auto items-center md:px-0 mt-5">
       {isLoaded ? (
         <>
           {status === true ? (
             <>
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
                 {photos.map((photo, index) => (
                   <PhotoItem key={index} photo={photo} single={false} />
                 ))}
@@ -123,7 +95,7 @@ const Photos = (props) => {
             </>
           ) : (
             <>
-              <p>No Post Found !</p>
+              <p>No Photo Found !</p>
             </>
           )}
         </>

@@ -1,0 +1,95 @@
+== Get All Albums
+
+http://jsonplaceholder.typicode.com/albums
+
+[
+  {
+    "userId": 1,
+    "id": 1,
+    "title": "quidem molestiae enim"
+  },
+  {
+    "userId": 1,
+    "id": 2,
+    "title": "sunt qui excepturi placeat culpa"
+  }
+]
+  
+
+== Get Single Album Info
+
+http://jsonplaceholder.typicode.com/albums/1
+
+{
+  "userId": 1,
+  "id": 1,
+  "title": "quidem molestiae enim"
+}
+
+== Get Single Album All Photos
+
+http://jsonplaceholder.typicode.com/albums/1/photos
+http://jsonplaceholder.typicode.com/albums/1/photos?_limit=2
+http://jsonplaceholder.typicode.com/albums/1/photos?_page=10
+
+[
+  {
+    "albumId": 1,
+    "id": 1,
+    "title": "accusamus beatae ad facilis cum similique qui sunt",
+    "url": "https://via.placeholder.com/600/92c952",
+    "thumbnailUrl": "https://via.placeholder.com/150/92c952"
+  },
+  {
+    "albumId": 1,
+    "id": 2,
+    "title": "reprehenderit est deserunt velit ipsam",
+    "url": "https://via.placeholder.com/600/771796",
+    "thumbnailUrl": "https://via.placeholder.com/150/771796"
+  }
+]
+
+== Get Single Photo Info.
+http://jsonplaceholder.typicode.com/photos/1
+
+{
+  "albumId": 1,
+  "id": 1,
+  "title": "accusamus beatae ad facilis cum similique qui sunt",
+  "url": "https://via.placeholder.com/600/92c952",
+  "thumbnailUrl": "https://via.placeholder.com/150/92c952"
+}
+
+== Get All photos
+
+http://jsonplaceholder.typicode.com/photos
+http://jsonplaceholder.typicode.com/photos?_limit=2
+http://jsonplaceholder.typicode.com/photos?_page=10
+
+[
+  {
+    "albumId": 1,
+    "id": 1,
+    "title": "accusamus beatae ad facilis cum similique qui sunt",
+    "url": "https://via.placeholder.com/600/92c952",
+    "thumbnailUrl": "https://via.placeholder.com/150/92c952"
+  },
+  {
+    "albumId": 1,
+    "id": 2,
+    "title": "reprehenderit est deserunt velit ipsam",
+    "url": "https://via.placeholder.com/600/771796",
+    "thumbnailUrl": "https://via.placeholder.com/150/771796"
+  },
+  {
+    "albumId": 1,
+    "id": 3,
+    "title": "officia porro iure quia iusto qui ipsa ut modi",
+    "url": "https://via.placeholder.com/600/24f355",
+    "thumbnailUrl": "https://via.placeholder.com/150/24f355"
+  }
+]
+
+
+
+  

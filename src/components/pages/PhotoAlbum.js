@@ -6,11 +6,11 @@ import Page from "./Page"
 const PhotoAlbum = () => {
   const params = useParams()
   useEffect(() => {
-    document.title = "Photos"
+    document.title = `Photo Album#${params.albumId}`
   }, [])
   return (
-    <Page title="Photos">
-      <Photos albumId={params.photoId} />
+    <Page title={`Photo Album#${params.albumId}`}>
+      <Photos albumId={params.albumId} />
     </Page>
   )
 }

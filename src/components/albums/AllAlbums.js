@@ -10,7 +10,7 @@ const AllAlbums = (props) => {
   const [isLoaded, setIsLoaded] = useState(false)
   const [albums, setAbums] = useState([])
   const [maxPages, setMaxPages] = useState(1)
-  // const [limit, setLimit] = useState(5)
+  const [limit, setLimit] = useState(5)
   const [page, setPage] = useState(1)
   const [loadMoreBtn, setLoadMoreBtn] = useState(0)
   const [status, setStatus] = useState(false)
@@ -19,43 +19,16 @@ const AllAlbums = (props) => {
 
   // Test Case
 
-  // Limit
-
-  // API end Points.
-
-  // All Images.
-  // http://jsonplaceholder.typicode.com/photos
-
-  // Filtering.
-  // http://jsonplaceholder.typicode.com/photos?_limit=5&_page=6
-
-  // Albums.
-  // http://jsonplaceholder.typicode.com/albums/1/photos
-
-  // Limit For Albums.
-  // http://jsonplaceholder.typicode.com/albums/1/photos?_limit=2
-
-  // All Albums.
-  // http://jsonplaceholder.typicode.com/albums
-
-  // Single Image.
-  // http://jsonplaceholder.typicode.com/photos/7
-
   useEffect(() => {
+    setLimit(5)
     // GET request using axios inside useEffect React hook
 
     // const catFilter = typeof props.catSlug !== "undefined" ? `&catslug=${props.catSlug}` : ""
 
     // const apiLink = `/wp-json/pmapi/v1/jobs?limit=4&&page=${page}${catFilter}`
     var apiLink
-    console.log(props.albumId)
-    if (typeof props.albumId !== undefined) {
-      apiLink = `http://jsonplaceholder.typicode.com/albums/8/photos?_limit=5&_page=6`
-    } else {
-      apiLink = `http://jsonplaceholder.typicode.com/photos?_limit=5&_page=6`
-    }
 
-    apiLink = `http://jsonplaceholder.typicode.com/albums`
+    apiLink = `http://jsonplaceholder.typicode.com/albums?_limit=${limit}&_page=${page}`
 
     const fetchData = () => {
       axios
@@ -102,7 +75,7 @@ const AllAlbums = (props) => {
   }
 
   return (
-    <div className="container px-4 mx-auto items-center md:px-0">
+    <div className="container px-4 mx-auto items-center md:px-0 mt-5">
       {isLoaded ? (
         <>
           {status === true ? (
