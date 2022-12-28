@@ -72,7 +72,7 @@ const Photos = (props) => {
         <>
           {status === true ? (
             <>
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-6 gap-6">
+              <div className="grid grid-cols-1 gap-4 px-6 md:grid-cols-3 md:p-0 lg:grid-cols-6 gap-6">
                 {photos.map((photo, index) => (
                   <PhotoCard key={index} photo={photo} single={false} />
                 ))}

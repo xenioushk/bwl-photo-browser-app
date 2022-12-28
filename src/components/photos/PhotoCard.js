@@ -12,9 +12,9 @@ const PhotoCard = (props) => {
               Album#{props.photo.albumId}
             </Link>
           </span>
-          <img src={props.photo.thumbnailUrl} alt={props.photo.title} className="" />
 
-          <Link to={`/photo/${props.photo.id}`} className="transition p-3 text-black-600 font-bold hover:text-primaryBlue-500">
+          <Link to={`/photo/${props.photo.id}`} className="transition p-3 text-black-600 font-normal text-sm text-center md:font-bold text-bold hover:text-primaryBlue-500 ">
+            <img src={props.photo.thumbnailUrl} alt={props.photo.title} className="block w-full" />
             {props.photo.title}
           </Link>
         </div>
