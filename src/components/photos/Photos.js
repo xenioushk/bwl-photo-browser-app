@@ -1,29 +1,30 @@
 import React, { useState, useEffect } from "react"
-// import { useParams } from "react-router-dom"
 import PhotoCard from "./PhotoCard"
 import axios from "axios"
 import loader from "../../loader.gif"
+import Button from "../base/Button"
 
 const Photos = (props) => {
-  // const params = useParams()
-
   const [isLoaded, setIsLoaded] = useState(false)
   const [photos, setPhotos] = useState([])
-  const [limit, setLimit] = useState(6)
+  const [albumId, setAlbumId] = useState("")
   const [page, setPage] = useState(1)
   const [loadMoreBtn, setLoadMoreBtn] = useState(1)
   const [status, setStatus] = useState(false)
   const [loadMoreBtnText, setLoadMoreBtnText] = useState("Load More")
   const [loadMoreBtnDisabled, setLoadMoreBtnDisabled] = useState(false)
+  const [albumBadge, setAlbumBadge] = useState(true)
+
+  if (typeof props.albumId !== "undefined") {
+    setAlbumId(props.albumId)
+  }
 
   useEffect(() => {
-    // GET request using axios inside useEffect React hook
-
-    setLimit(6)
+    const limit = 10
     var apiLink
-    // console.log(props)
-    if (typeof props.albumId !== "undefined") {
-      apiLink = `http://jsonplaceholder.typicode.com/albums/${props.albumId}/photos?_limit=${limit}&_page=${page}`
+    if (albumId !== "") {
+      setAlbumBadge(false)
+      apiLink = `http://jsonplaceholder.typicode.com/albums/${albumId}/photos?_limit=${limit}&_page=${page}`
     } else {
       apiLink = `http://jsonplaceholder.typicode.com/photos?_limit=${limit}&_page=${page}`
     }
@@ -32,38 +33,32 @@ const Photos = (props) => {
       axios
         .get(apiLink)
         .then((res) => {
-          console.log(res.data)
-          console.log(res.data.length)
-          setLoadMoreBtnText("Load More")
-          setLoadMoreBtnDisabled(false)
-          setIsLoaded(true)
-          setStatus(res.data.length > 0 ? true : false)
-          // maximum number of page value is greater than 1 then we are going to show the button.
+          // console.log(res.data)
+          // console.log(res.data.length)
 
-          // res.data.max_pages > 1 ? setLoadMoreBtn(1) : setLoadMoreBtn(0)
-
-          // setJobs(jobs.push(res.data.job_data))
-          setPhotos((prev) => prev.concat(res.data))
+          if (res.data.length === limit) {
+            setLoadMoreBtnText("Load More")
+            setLoadMoreBtnDisabled(false)
+            setIsLoaded(true)
+            setStatus(res.data.length > 0 ? true : false)
+            setPhotos((prev) => prev.concat(res.data))
+          } else {
+            // Remove the load more button.
+            setLoadMoreBtn(0)
+          }
         })
         .catch((err) => console.log(err))
     }
 
     fetchData()
-  }, [page])
+  }, [page, albumId])
 
   const onClick = (e) => {
-    //Remove it later.
-
-    // setLimit((prev) => prev)
-
-    let currentPage
-    setPage((currentPage = parseInt(page) + 1))
+    setPage((prev) => {
+      prev++
+    })
     setLoadMoreBtnText("Loading....")
     setLoadMoreBtnDisabled(true)
-
-    // if (currentPage === maxPages) {
-    //   e.target.remove()
-    // }
   }
 
   return (
@@ -74,18 +69,18 @@ const Photos = (props) => {
             <>
               <div className="grid grid-cols-1 gap-4 px-6 md:grid-cols-3 md:p-0 lg:grid-cols-6 gap-6">
                 {photos.map((photo, index) => (
-                  <PhotoCard key={index} photo={photo} single={false} />
+                  <PhotoCard key={index} photo={photo} single={false} albumBadge={albumBadge} />
                 ))}
               </div>
 
               {loadMoreBtn ? (
-                <div className="grid grid-cols-1 gap-y-4 mt-4 md:mt-6">
-                  <button disabled={loadMoreBtnDisabled === true ? "disabled" : ""} className="transition bg-primaryBlue-600 text-white text-underline-none font-bold px-4 py-4 rounded hover:bg-gray-800 btn-inline p-3 mx-auto w-1/2 md:w-1/4" onClick={onClick}>
-                    {loadMoreBtnText}
-                  </button>
+                <div className="grid grid-cols-1 text-center gap-y-4 mt-4 md:mt-6">
+                  <Button disabled={loadMoreBtnDisabled} btnText={loadMoreBtnText} onClick={onClick} />
                 </div>
               ) : (
-                ""
+                <div className="grid grid-cols-1 text-center gap-y-4 mt-4 md:mt-6">
+                  <p>No more photos available!</p>
+                </div>
               )}
             </>
           ) : (

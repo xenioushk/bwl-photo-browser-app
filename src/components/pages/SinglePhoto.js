@@ -32,7 +32,7 @@ const SinglePhoto = () => {
           // setJobCategory(res.data.job_data[0].category)
           // setJobCategorySlug(res.data.job_data[0].cat_slug)
           setSinglePhoto((prev) => prev.concat(res.data))
-          document.title = `${res.data.title} | Pocket Money`
+          document.title = `${res.data.title} | Photo Browser Application`
         })
         .catch((err) => console.log(err))
     }
