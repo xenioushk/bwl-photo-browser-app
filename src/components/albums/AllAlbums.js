@@ -1,57 +1,37 @@
 import React, { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
 import AlbumCard from "./AlbumCard"
 import axios from "axios"
 import loader from "../../loader.gif"
+import Button from "../base/Button"
 
-const AllAlbums = (props) => {
-  const params = useParams()
-
+const AllAlbums = () => {
   const [isLoaded, setIsLoaded] = useState(false)
   const [albums, setAbums] = useState([])
-  const [maxPages, setMaxPages] = useState(1)
-  const [limit, setLimit] = useState(12)
   const [page, setPage] = useState(1)
   const [loadMoreBtn, setLoadMoreBtn] = useState(0)
   const [status, setStatus] = useState(false)
   const [loadMoreBtnText, setLoadMoreBtnText] = useState("Load More")
   const [loadMoreBtnDisabled, setLoadMoreBtnDisabled] = useState(false)
 
-  // Test Case
-
   useEffect(() => {
-    setLimit(5)
-    // GET request using axios inside useEffect React hook
-
-    // const catFilter = typeof props.catSlug !== "undefined" ? `&catslug=${props.catSlug}` : ""
-
-    // const apiLink = `/wp-json/pmapi/v1/jobs?limit=4&&page=${page}${catFilter}`
-    var apiLink
-
-    apiLink = `http://jsonplaceholder.typicode.com/albums?_limit=${limit}&_page=${page}`
+    const limit = 12
+    var apiLink = `http://jsonplaceholder.typicode.com/albums?_limit=${limit}&_page=${page}`
 
     const fetchData = () => {
       axios
         .get(apiLink)
         .then((res) => {
-          console.log(res.data)
-          console.log(res.data.length)
-          setLoadMoreBtnText("Load More")
-          setLoadMoreBtnDisabled(false)
-          setMaxPages(res.data.max_pages)
-          setIsLoaded(true)
-          setStatus(res.data.length > 0 ? true : false)
-
-          if (typeof props.catSlug !== "undefined") {
-            // console.log(props.catSlug)
-            // setCateName(res.data.cat_name)
+          if (res.data.length === limit) {
+            setLoadMoreBtnText("Load More")
+            setLoadMoreBtnDisabled(false)
+            setIsLoaded(true)
+            setStatus(res.data.length > 0 ? true : false)
+            setLoadMoreBtn(1)
+            setAbums((prev) => prev.concat(res.data))
+          } else {
+            // Remove the load more button.
+            setLoadMoreBtn(0)
           }
-          // maximum number of page value is greater than 1 then we are going to show the button.
-
-          // res.data.max_pages > 1 ? setLoadMoreBtn(1) : setLoadMoreBtn(0)
-          setLoadMoreBtn(1)
-          // setJobs(jobs.push(res.data.job_data))
-          setAbums((prev) => prev.concat(res.data))
         })
         .catch((err) => console.log(err))
     }
@@ -60,18 +40,11 @@ const AllAlbums = (props) => {
   }, [page])
 
   const onClick = (e) => {
-    //Remove it later.
-
-    // setLimit((prev) => prev)
-
-    let currentPage
-    setPage((currentPage = parseInt(page) + 1))
+    setPage((prev) => {
+      prev++
+    })
     setLoadMoreBtnText("Loading....")
     setLoadMoreBtnDisabled(true)
-
-    if (currentPage === maxPages) {
-      e.target.remove()
-    }
   }
 
   return (
@@ -87,10 +60,8 @@ const AllAlbums = (props) => {
               </div>
 
               {loadMoreBtn ? (
-                <div className="grid grid-cols-1 gap-y-4 mt-4 md:mt-6">
-                  <button disabled={loadMoreBtnDisabled === true ? "disabled" : ""} className="transition bg-Green-900 text-white text-underline-none font-bold px-4 py-4 rounded hover:bg-gray-800 btn-inline p-3 mx-auto w-1/2 md:w-1/4" onClick={onClick}>
-                    {loadMoreBtnText}
-                  </button>
+                <div className="grid grid-cols-1 gap-y-4 mt-4 text-center md:mt-6">
+                  <Button disabled={loadMoreBtnDisabled} btnText={loadMoreBtnText} onClick={onClick} />
                 </div>
               ) : (
                 ""
