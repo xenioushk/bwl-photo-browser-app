@@ -4,7 +4,7 @@ import logo from "../../logo.png"
 
 const Header = () => {
   return (
-    <section className="bg-Green-900">
+    <section className="bg-Gray-100">
       <nav className="relative container px-4 py-3 mx-auto md:px-0">
         <div className="flex items-center justify-between">
           <div className="">
@@ -16,8 +16,8 @@ const Header = () => {
           </div>
 
           <div className="space-x-6 text-right md:flex">
-            <Link to="/albums" className="bg-Green-500 text-dark font-bold  text-underline-none p-2 block hover:bg-Green-100 md:px-4 py-2 inline-block rounded">
-              Browser Albums
+            <Link to="/all-albums" className="transition bg-primaryBlue-600 text-white text-underline-none font-bold px-4 py-4 rounded hover:bg-black md:px-4 py-2 inline-block">
+              All Albums
             </Link>
           </div>
         </div>

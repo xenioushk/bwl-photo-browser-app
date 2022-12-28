@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 // import { useParams } from "react-router-dom"
-import PhotoItem from "./PhotoItem"
+import PhotoCard from "./PhotoCard"
 import axios from "axios"
 import loader from "../../loader.gif"
 
@@ -9,7 +9,7 @@ const Photos = (props) => {
 
   const [isLoaded, setIsLoaded] = useState(false)
   const [photos, setPhotos] = useState([])
-  const [limit, setLimit] = useState(20)
+  const [limit, setLimit] = useState(6)
   const [page, setPage] = useState(1)
   const [loadMoreBtn, setLoadMoreBtn] = useState(1)
   const [status, setStatus] = useState(false)
@@ -19,7 +19,7 @@ const Photos = (props) => {
   useEffect(() => {
     // GET request using axios inside useEffect React hook
 
-    // setLimit(20)
+    setLimit(6)
     var apiLink
     // console.log(props)
     if (typeof props.albumId !== "undefined") {
@@ -38,11 +38,6 @@ const Photos = (props) => {
           setLoadMoreBtnDisabled(false)
           setIsLoaded(true)
           setStatus(res.data.length > 0 ? true : false)
-
-          if (typeof props.catSlug !== "undefined") {
-            // console.log(props.catSlug)
-            // setCateName(res.data.cat_name)
-          }
           // maximum number of page value is greater than 1 then we are going to show the button.
 
           // res.data.max_pages > 1 ? setLoadMoreBtn(1) : setLoadMoreBtn(0)
@@ -54,7 +49,7 @@ const Photos = (props) => {
     }
 
     fetchData()
-  }, [page, props.catSlug])
+  }, [page])
 
   const onClick = (e) => {
     //Remove it later.
@@ -77,15 +72,15 @@ const Photos = (props) => {
         <>
           {status === true ? (
             <>
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-6 gap-6">
                 {photos.map((photo, index) => (
-                  <PhotoItem key={index} photo={photo} single={false} />
+                  <PhotoCard key={index} photo={photo} single={false} />
                 ))}
               </div>
 
               {loadMoreBtn ? (
                 <div className="grid grid-cols-1 gap-y-4 mt-4 md:mt-6">
-                  <button disabled={loadMoreBtnDisabled === true ? "disabled" : ""} className="transition bg-Green-900 text-white text-underline-none font-bold px-4 py-4 rounded hover:bg-gray-800 btn-inline p-3 mx-auto w-1/2 md:w-1/4" onClick={onClick}>
+                  <button disabled={loadMoreBtnDisabled === true ? "disabled" : ""} className="transition bg-primaryBlue-600 text-white text-underline-none font-bold px-4 py-4 rounded hover:bg-gray-800 btn-inline p-3 mx-auto w-1/2 md:w-1/4" onClick={onClick}>
                     {loadMoreBtnText}
                   </button>
                 </div>
