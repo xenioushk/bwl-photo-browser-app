@@ -24,7 +24,7 @@ function App() {
       <Routes>
         <Route path="/" element={<AllPhotos />} />
         <Route path="/photo/:photoId" element={<SinglePhoto />} />
-        <Route path="/albums" element={<Albums />} />
+        <Route path="/all-albums" element={<Albums />} />
         <Route path="/album/:albumId" element={<PhotoAlbum />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/terms" element={<Terms />} />

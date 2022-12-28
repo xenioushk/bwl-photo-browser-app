@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
-import AlbumItem from "./AlbumItem"
+import AlbumCard from "./AlbumCard"
 import axios from "axios"
 import loader from "../../loader.gif"
 
@@ -10,7 +10,7 @@ const AllAlbums = (props) => {
   const [isLoaded, setIsLoaded] = useState(false)
   const [albums, setAbums] = useState([])
   const [maxPages, setMaxPages] = useState(1)
-  const [limit, setLimit] = useState(5)
+  const [limit, setLimit] = useState(12)
   const [page, setPage] = useState(1)
   const [loadMoreBtn, setLoadMoreBtn] = useState(0)
   const [status, setStatus] = useState(false)
@@ -48,8 +48,8 @@ const AllAlbums = (props) => {
           }
           // maximum number of page value is greater than 1 then we are going to show the button.
 
-          res.data.max_pages > 1 ? setLoadMoreBtn(1) : setLoadMoreBtn(0)
-
+          // res.data.max_pages > 1 ? setLoadMoreBtn(1) : setLoadMoreBtn(0)
+          setLoadMoreBtn(1)
           // setJobs(jobs.push(res.data.job_data))
           setAbums((prev) => prev.concat(res.data))
         })
@@ -57,7 +57,7 @@ const AllAlbums = (props) => {
     }
 
     fetchData()
-  }, [page, props.catSlug])
+  }, [page])
 
   const onClick = (e) => {
     //Remove it later.
@@ -80,9 +80,9 @@ const AllAlbums = (props) => {
         <>
           {status === true ? (
             <>
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-3 gap-8 lg:grid-cols-6">
                 {albums.map((album, index) => (
-                  <AlbumItem key={index} album={album} single={false} />
+                  <AlbumCard key={index} album={album} single={false} />
                 ))}
               </div>
 

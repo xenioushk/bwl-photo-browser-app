@@ -4,20 +4,18 @@ import logo from "../../logo.png"
 
 const Header = () => {
   return (
-    <section className="bg-Green-900">
-      <nav className="relative container px-4 py-3 mx-auto md:px-0">
+    <section className="bg-Gray-100">
+      <nav className="relative container px-6 py-3 mx-auto md:px-0">
         <div className="flex items-center justify-between">
-          <div className="">
-            <Link to="/">
-              <span className="text-2xl text-underline-none text-bold">
-                <img src={logo} alt="Logo" />
-              </span>
-            </Link>
-          </div>
+          <Link to="/">
+            <span className="text-left">
+              <img src={logo} alt="Logo" />
+            </span>
+          </Link>
 
           <div className="space-x-6 text-right md:flex">
-            <Link to="/albums" className="bg-Green-500 text-dark font-bold  text-underline-none p-2 block hover:bg-Green-100 md:px-4 py-2 inline-block rounded">
-              Browser Albums
+            <Link to="/all-albums" className="transition bg-primaryBlue-600 text-white text-underline-none font-normal text-sm px-2 py-2 rounded hover:bg-black md:px-4 py-2 md:text-md md:font-bold">
+              All Albums
             </Link>
           </div>
         </div>
