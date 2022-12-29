@@ -31,6 +31,7 @@ const PhotoCard = (props) => {
 
           <div className="flex flex-col gap-4 px-6 col-span-2">
             <h2 className="text-xl font-bold">{props.photo.title}</h2>
+
             <p>
               <strong>Album:</strong> <Link to={`/album/${props.album.id}`}>{props.album.title}</Link>
             </p>

@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import Page from "./Page"
 import Breadcrumb from "../base/Breadcrumb"
 
+
 const Terms = () => {
   useEffect(() => {
     document.title = "Terms"
@@ -19,6 +20,7 @@ const Terms = () => {
             <li>Showcase your abilities, and use the task to demonstrate your idea of best practices, regarding coding style, project structure, frameworks, patterns, design, testing etc.</li>
             <li>There is no right or wrong solution, as long as it is your solution.Be prepared to describe your work in detail.</li>
           </ol>
+
         </div>
       </div>
     </Page>

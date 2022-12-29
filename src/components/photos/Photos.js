@@ -70,6 +70,7 @@ const Photos = ({ albumId }) => {
           {status === true ? (
             <>
               <div className="grid grid-cols-1 gap-4 px-6 md:grid-cols-3 md:p-0 lg:grid-cols-4 gap-6 xl:grid-cols-5 gap-6 ">
+
                 {photos.map((photo, index) => (
                   <PhotoCard key={index} photo={photo} single={false} albumBadge={albumBadge} />
                 ))}

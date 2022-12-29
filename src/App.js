@@ -22,6 +22,7 @@ const LazySingleAlbum = React.lazy(() => import("./components/pages/SingleAlbum"
 //About Us Page
 const LazyAboutPage = React.lazy(() => import("./components/pages/AboutPage"))
 
+
 //Terms Page
 const LazyTermsPage = React.lazy(() => import("./components/pages/TermsPage"))
 
