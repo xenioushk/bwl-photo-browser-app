@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import Photos from "../photos/Photos"
 import Page from "./Page"
 
-const AllPhotos = () => {
+const AllPhotosPage = () => {
   useEffect(() => {
     document.title = "All Photos"
   }, [])
@@ -13,4 +13,4 @@ const AllPhotos = () => {
   )
 }
 
-export default AllPhotos
+export default AllPhotosPage

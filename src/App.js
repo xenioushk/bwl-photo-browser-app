@@ -1,13 +1,17 @@
 import React from "react"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { QueryClientProvider, QueryClient } from "react-query"
+import { ReactQueryDevtools } from "react-query/devtools"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Header from "./components/shared/Header"
 import Footer from "./components/shared/Footer"
 
+const queryClient = new QueryClient()
+
 // Home Page.
-const LazyAllPhotos = React.lazy(() => import("./components/pages/AllPhotos"))
+const LazyAllPhotosPage = React.lazy(() => import("./components/pages/AllPhotosPage"))
 
 // SinglePhoto
-const LazySinglePhoto = React.lazy(() => import("./components/pages/SinglePhoto"))
+const LazySinglePhotoPage = React.lazy(() => import("./components/pages/SinglePhotoPage"))
 
 //All Albums.
 const LazyAlbums = React.lazy(() => import("./components/pages/Albums"))
@@ -16,67 +20,70 @@ const LazyAlbums = React.lazy(() => import("./components/pages/Albums"))
 const LazySingleAlbum = React.lazy(() => import("./components/pages/SingleAlbum"))
 
 //About Us Page
-const LazyAboutUs = React.lazy(() => import("./components/pages/AboutUs"))
+const LazyAboutUsPage = React.lazy(() => import("./components/pages/AboutUsPage"))
 
 //Terms Page
-const LazyTerms = React.lazy(() => import("./components/pages/Terms"))
+const LazyTermsPage = React.lazy(() => import("./components/pages/TermsPage"))
 
 function App() {
   return (
-    <BrowserRouter>
-      <Header />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <React.Suspense fallback="Loading...">
-              <LazyAllPhotos />
-            </React.Suspense>
-          }
-        />
-        <Route
-          path="/photo/:photoId"
-          element={
-            <React.Suspense fallback="Loading...">
-              <LazySinglePhoto />
-            </React.Suspense>
-          }
-        />
-        <Route
-          path="/all-albums"
-          element={
-            <React.Suspense fallback="Loading...">
-              <LazyAlbums />
-            </React.Suspense>
-          }
-        />
-        <Route
-          path="/album/:albumId"
-          element={
-            <React.Suspense fallback="Loading...">
-              <LazySingleAlbum />
-            </React.Suspense>
-          }
-        />
-        <Route
-          path="/about-us"
-          element={
-            <React.Suspense fallback="Loading...">
-              <LazyAboutUs />
-            </React.Suspense>
-          }
-        />
-        <Route
-          path="/terms"
-          element={
-            <React.Suspense fallback="Loading...">
-              <LazyTerms />
-            </React.Suspense>
-          }
-        />
-      </Routes>
-      <Footer />
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <Header />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <React.Suspense fallback="Loading...">
+                <LazyAllPhotosPage />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="/photo/:photoId"
+            element={
+              <React.Suspense fallback="Loading...">
+                <LazySinglePhotoPage />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="/all-albums"
+            element={
+              <React.Suspense fallback="Loading...">
+                <LazyAlbums />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="/album/:albumId"
+            element={
+              <React.Suspense fallback="Loading...">
+                <LazySingleAlbum />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="/about-us"
+            element={
+              <React.Suspense fallback="Loading...">
+                <LazyAboutUsPage />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="/terms"
+            element={
+              <React.Suspense fallback="Loading...">
+                <LazyTermsPage />
+              </React.Suspense>
+            }
+          />
+        </Routes>
+        <Footer />
+      </Router>
+      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+    </QueryClientProvider>
   )
 }
 

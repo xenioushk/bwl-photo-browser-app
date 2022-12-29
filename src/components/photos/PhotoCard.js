@@ -3,9 +3,9 @@ import { Link } from "react-router-dom"
 import PropTypes from "prop-types"
 
 const PhotoCard = (props) => {
-  // alert(props.albumBadge)
+  document.title = `${props.photo.title} | Photo Browser App `
   return (
-    <div className="" key={props.photo.id}>
+    <>
       {!props.single ? (
         <div className="flex flex-col justify-center bg-gray rounded shadow-md relative">
           {props.albumBadge === true ? (
@@ -25,18 +25,44 @@ const PhotoCard = (props) => {
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-4 gap-4">
-            <div className="col-span-4 mb-5">
-              <h2>{props.photo.title}</h2>
-              <p>
-                Album ID: <Link to={`/photos/album/${props.photo.albumId}`}>{props.photo.albumId}</Link>
-              </p>
-              <img src={props.photo.url} alt="Logo" />
-            </div>
+          <div className="">
+            <img src={props.photo.url} alt="Logo" />
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <h2>{props.photo.title}</h2>
+            <p>
+              <strong>Album:</strong> <Link to={`/album/${props.album.id}`}>{props.album.title}</Link>
+            </p>
+
+            <h3 className="text-xl font-bold border-bottom-1">Author Information:</h3>
+            <ul>
+              <li>Name: {props.user.name}</li>
+              <li>Email: {props.user.email}</li>
+              <li>Phone: {props.user.phone}</li>
+              <li>Website: {props.user.website}</li>
+            </ul>
+
+            <h4 className="text-md font-bold border-bottom-1">Address:</h4>
+
+            <ul>
+              <li>Address: {props.user.address.street}</li>
+              <li>Suite: {props.user.address.suite}</li>
+              <li>City: {props.user.address.city}</li>
+              <li>Zipcode: {props.user.address.zipcode}</li>
+            </ul>
+
+            <h4 className="text-md font-bold border-bottom-1">Company:</h4>
+
+            <ul>
+              <li>Name: {props.user.company.name}</li>
+              <li>Catch Phrase: {props.user.company.catchPhrase}</li>
+              <li>Business: {props.user.company.bs}</li>
+            </ul>
           </div>
         </>
       )}
-    </div>
+    </>
   )
 }
 
