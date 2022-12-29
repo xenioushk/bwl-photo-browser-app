@@ -5,21 +5,17 @@ import { Link } from "react-router-dom"
 const Breadcrumb = (props) => {
   return (
     <>
-      <nav className="bg-Gray-100 space-y-2 border-1 border-bg-Gray-100 px-5 py-3 w-full mt-2 mb-2 rounded">
-        <ol className="list-reset text-sm font-normal md:font-bold md:font-bold flex">
+      <nav className="shadow bg-Gray-100 space-y-2 border-1 border-bg-Gray-100 px-5 py-3 w-full mt-2 mb-4 rounded">
+        <ol className="list-reset text-sm font-normal flex flex-wrap md:font-bold text-black">
           <li>
-            <Link to={"/"} className="text-Green-900 hover:text-gray-500">
-              Home
-            </Link>
+            <Link to={"/"}>Home</Link>
           </li>
 
           {props.albumCategory ? (
             <>
               <li>
-                <span className="text-gray-500 mx-2">/</span>
-              </li>
-              <li>
-                <Link to={`/all-albums/`} className="text-Green-900 hover:text-gray-500">
+                <span className="text-gray-500 mx-1">/</span>
+                <Link to={`/all-albums/`} className="transition hover:text-primaryBlue-600" title="All Albums">
                   Albums
                 </Link>
               </li>
@@ -30,19 +26,15 @@ const Breadcrumb = (props) => {
 
           {props.photo ? (
             <>
-              <li>
-                <span className="text-gray-500 mx-2">/</span>
-              </li>
-              <li className="text-gray-900 font-normal">
-                <Link to={`/all-albums/`} className="text-Green-900 hover:text-gray-500">
+              <li className="text-gray-900">
+                <span className="text-gray-500 mx-1">/</span>
+                <Link to={`/all-albums/`} className="transition hover:text-primaryBlue-600" title="All Albums">
                   Albums
                 </Link>
               </li>
-              <li>
-                <span className="text-gray-500 mx-2">/</span>
-              </li>
-              <li className="text-gray-900 font-normal">
-                <Link to={`/album/${props.album.id}`} className="text-Green-900 hover:text-gray-500">
+              <li className="text-gray-900">
+                <span className="text-gray-500 mx-1">/</span>
+                <Link to={`/album/${props.album.id}`} className="transition hover:text-primaryBlue-600" title={props.album.title}>
                   {props.album.title}
                 </Link>
               </li>
@@ -51,10 +43,10 @@ const Breadcrumb = (props) => {
             ""
           )}
 
-          <li>
-            <span className="text-gray-500 mx-2">/</span>
+          <li className="text-gray-900 font-normal">
+            <span className="text-gray-500 mx-1">/</span>
+            {props.title}
           </li>
-          <li className="text-gray-900 font-normal">{props.title}</li>
         </ol>
       </nav>
     </>

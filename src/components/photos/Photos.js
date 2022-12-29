@@ -5,7 +5,7 @@ import loader from "../../loader.gif"
 import Button from "../base/Button"
 import Breadcrumb from "../base/Breadcrumb"
 
-const Photos = ({ albumId }) => {
+const Photos = ({ albumId, albumTitle }) => {
   const [isLoaded, setIsLoaded] = useState(false)
   const [photos, setPhotos] = useState([])
   // const [albumId, setAlbumId] = useState("")
@@ -64,13 +64,13 @@ const Photos = ({ albumId }) => {
 
   return (
     <div className="container px-4 mx-auto items-center md:px-0 mt-5">
-      <Breadcrumb albumCategory="All Albums" title="title" />
+      {albumTitle ? <Breadcrumb albumCategory="All Albums" title={albumTitle} /> : <></>}
+
       {isLoaded ? (
         <>
           {status === true ? (
             <>
-              <div className="grid grid-cols-1 gap-4 px-6 md:grid-cols-3 md:p-0 lg:grid-cols-4 gap-6 xl:grid-cols-5 gap-6 ">
-
+              <div className="grid grid-cols-1 gap-4 px-0 md:grid-cols-2 md:p-0 lg:grid-cols-4 gap-6 xl:grid-cols-5 gap-6 ">
                 {photos.map((photo, index) => (
                   <PhotoCard key={index} photo={photo} single={false} albumBadge={albumBadge} />
                 ))}

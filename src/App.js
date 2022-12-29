@@ -14,14 +14,13 @@ const LazyAllPhotosPage = React.lazy(() => import("./components/pages/AllPhotosP
 const LazySinglePhotoPage = React.lazy(() => import("./components/pages/SinglePhotoPage"))
 
 //All Albums.
-const LazyAlbums = React.lazy(() => import("./components/pages/Albums"))
+const LazyAlbumsPage = React.lazy(() => import("./components/pages/AlbumsPage"))
 
 // Single Album.
-const LazySingleAlbum = React.lazy(() => import("./components/pages/SingleAlbum"))
+const LazySingleAlbumPage = React.lazy(() => import("./components/pages/SingleAlbumPage"))
 
 //About Us Page
 const LazyAboutPage = React.lazy(() => import("./components/pages/AboutPage"))
-
 
 //Terms Page
 const LazyTermsPage = React.lazy(() => import("./components/pages/TermsPage"))
@@ -35,7 +34,7 @@ function App() {
           <Route
             path="/"
             element={
-              <React.Suspense fallback="Loading...">
+              <React.Suspense fallback="">
                 <LazyAllPhotosPage />
               </React.Suspense>
             }
@@ -43,7 +42,7 @@ function App() {
           <Route
             path="/photo/:photoId"
             element={
-              <React.Suspense fallback="Loading...">
+              <React.Suspense fallback="">
                 <LazySinglePhotoPage />
               </React.Suspense>
             }
@@ -51,23 +50,23 @@ function App() {
           <Route
             path="/all-albums"
             element={
-              <React.Suspense fallback="Loading...">
-                <LazyAlbums />
+              <React.Suspense fallback="">
+                <LazyAlbumsPage />
               </React.Suspense>
             }
           />
           <Route
             path="/album/:albumId"
             element={
-              <React.Suspense fallback="Loading...">
-                <LazySingleAlbum />
+              <React.Suspense fallback="">
+                <LazySingleAlbumPage />
               </React.Suspense>
             }
           />
           <Route
             path="/about"
             element={
-              <React.Suspense fallback="Loading...">
+              <React.Suspense fallback="">
                 <LazyAboutPage />
               </React.Suspense>
             }
@@ -75,7 +74,7 @@ function App() {
           <Route
             path="/terms"
             element={
-              <React.Suspense fallback="Loading...">
+              <React.Suspense fallback="">
                 <LazyTermsPage />
               </React.Suspense>
             }

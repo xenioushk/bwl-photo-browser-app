@@ -7,7 +7,7 @@ const PhotoCard = (props) => {
   return (
     <>
       {!props.single ? (
-        <div className="flex flex-col justify-center bg-gray rounded shadow-xl border relative">
+        <div className="flex flex-col justify-item-start bg-gray rounded shadow-xl border relative">
           {props.albumBadge === true ? (
             <span className="text-sm transition absolute top-1 right-1 bg-primaryBlue-100 px-2 py-1 rounded text-white hover:bg-primaryBlue-500">
               <Link to={`/album/${props.photo.albumId}`} className="block">
@@ -18,18 +18,18 @@ const PhotoCard = (props) => {
             ""
           )}
 
-          <Link to={`/photo/${props.photo.id}`} className="flex flex-col gap-3 transition p-3 text-black-600 font-normal text-sm text-center md:font-bold text-bold hover:text-primaryBlue-500 ">
-            <img src={props.photo.thumbnailUrl} alt={props.photo.title} className="block w-full" />
-            <span>{props.photo.title}</span>
+          <Link to={`/photo/${props.photo.id}`} className="flex flex-col transition p-0 text-black-600 font-normal text-sm text-center md:font-bold text-bold hover:text-primaryBlue-500 ">
+            <img src={props.photo.thumbnailUrl} alt={props.photo.title} className="block w-full self-start" />
+            <span className="p-3">{props.photo.title}</span>
           </Link>
         </div>
       ) : (
         <>
-          <div className="flex justify-center items-center py-4 ">
+          <div className="flex justify-center items-start py-0 ">
             <img src={props.photo.url} alt={props.photo.title} className="block w-full rounded-xl shadow-2xl" />
           </div>
 
-          <div className="flex flex-col gap-4 px-6 col-span-2">
+          <div className="flex flex-col gap-4 px-1 mt-4 md:mt-0 md:px-6 md:col-span-1 xl:col-span-2">
             <h2 className="text-xl font-bold">{props.photo.title}</h2>
 
             <p>

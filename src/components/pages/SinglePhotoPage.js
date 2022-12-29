@@ -77,10 +77,9 @@ const SinglePhotoPage = () => {
 
   return (
     <>
-      <div className="container px-4 mx-auto items-center mt-4 md:px-0">
+      <div className="container px-4 mx-auto items-center md:px-0 mt-5">
         <Breadcrumb title={photoData.title} photo={photoData} album={albumData} />
-        <div className="grid grid-cols-3 gap-4 mt-4">
-
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mt-4">
           <PhotoCard key={photoId} photo={photoData} album={albumData} user={userData} single={true} />
         </div>
       </div>
