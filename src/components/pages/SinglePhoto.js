@@ -18,8 +18,8 @@ const SinglePhoto = () => {
   useEffect(() => {
     // GET request using axios inside useEffect React hook
     // const postId = {id: "[hexValue]", token: "[userToken]"}
-    const fetchData = () => {
-      axios
+    const fetchData = async () => {
+      await axios
         // .get(`/wp-json/pmapi/v1/job?p_id=${postId}`)
         .get(`/photos/${photoId}`)
         .then((res) => {
