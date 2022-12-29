@@ -27,3 +27,8 @@ build
 .env
 
 .VSCodeCounter
+
+#Ignore page.
+
+/src/components/pages/parallal_query.AboutUsPage.js
+/src/components/pages/bkp_SinglePhotoPage copy.js
