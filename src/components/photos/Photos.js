@@ -4,10 +4,10 @@ import axios from "axios"
 import loader from "../../loader.gif"
 import Button from "../base/Button"
 
-const Photos = (props) => {
+const Photos = ({ albumId }) => {
   const [isLoaded, setIsLoaded] = useState(false)
   const [photos, setPhotos] = useState([])
-  const [albumId, setAlbumId] = useState("")
+  // const [albumId, setAlbumId] = useState("")
   const [page, setPage] = useState(1)
   const [loadMoreBtn, setLoadMoreBtn] = useState(1)
   const [status, setStatus] = useState(false)
@@ -15,18 +15,18 @@ const Photos = (props) => {
   const [loadMoreBtnDisabled, setLoadMoreBtnDisabled] = useState(false)
   const [albumBadge, setAlbumBadge] = useState(true)
 
-  if (typeof props.albumId !== "undefined") {
-    setAlbumId(props.albumId)
-  }
+  // if (typeof props.albumId !== "undefined") {
+  //   setAlbumId(props.albumId)
+  // }
 
   useEffect(() => {
     const limit = 10
     var apiLink
-    if (albumId !== "") {
+    if (typeof albumId !== "undefined") {
       setAlbumBadge(false)
-      apiLink = `http://jsonplaceholder.typicode.com/albums/${albumId}/photos?_limit=${limit}&_page=${page}`
+      apiLink = `/albums/${albumId}/photos?_limit=${limit}&_page=${page}`
     } else {
-      apiLink = `http://jsonplaceholder.typicode.com/photos?_limit=${limit}&_page=${page}`
+      apiLink = `/photos?_limit=${limit}&_page=${page}`
     }
 
     const fetchData = () => {
@@ -54,9 +54,7 @@ const Photos = (props) => {
   }, [page, albumId])
 
   const onClick = (e) => {
-    setPage((prev) => {
-      prev++
-    })
+    setPage((prevPage) => prevPage + 1)
     setLoadMoreBtnText("Loading....")
     setLoadMoreBtnDisabled(true)
   }

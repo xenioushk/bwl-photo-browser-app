@@ -22,7 +22,7 @@ const SinglePhoto = () => {
     const fetchData = () => {
       axios
         // .get(`/wp-json/pmapi/v1/job?p_id=${postId}`)
-        .get(`http://jsonplaceholder.typicode.com/photos/${photoId}`)
+        .get(`/photos/${photoId}`)
         .then((res) => {
           setIsLoaded(true)
           // setIsLoaded(false)

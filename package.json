@@ -41,7 +41,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://jsonplaceholder.typicode.com",
+  "proxy": "https://jsonplaceholder.typicode.com",
   "devDependencies": {
     "autoprefixer": "10.4.13",
     "postcss": "8.4.18",
