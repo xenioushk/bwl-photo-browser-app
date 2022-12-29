@@ -20,7 +20,7 @@ const LazyAlbums = React.lazy(() => import("./components/pages/Albums"))
 const LazySingleAlbum = React.lazy(() => import("./components/pages/SingleAlbum"))
 
 //About Us Page
-const LazyAboutUsPage = React.lazy(() => import("./components/pages/AboutUsPage"))
+const LazyAboutPage = React.lazy(() => import("./components/pages/AboutPage"))
 
 //Terms Page
 const LazyTermsPage = React.lazy(() => import("./components/pages/TermsPage"))
@@ -64,10 +64,10 @@ function App() {
             }
           />
           <Route
-            path="/about-us"
+            path="/about"
             element={
               <React.Suspense fallback="Loading...">
-                <LazyAboutUsPage />
+                <LazyAboutPage />
               </React.Suspense>
             }
           />

@@ -3,6 +3,7 @@ import AlbumCard from "./AlbumCard"
 import axios from "axios"
 import loader from "../../loader.gif"
 import Button from "../base/Button"
+import Breadcrumb from "../base/Breadcrumb"
 
 const AllAlbums = () => {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -47,6 +48,7 @@ const AllAlbums = () => {
 
   return (
     <div className="container px-4 mx-auto items-center md:px-0 mt-5">
+      <Breadcrumb title="All Albums" />
       {isLoaded ? (
         <>
           {status === true ? (
