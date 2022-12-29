@@ -8,6 +8,7 @@ const Photos = ({ albumId }) => {
   const [isLoaded, setIsLoaded] = useState(false)
   const [photos, setPhotos] = useState([])
   // const [albumId, setAlbumId] = useState("")
+
   const [page, setPage] = useState(1)
   const [loadMoreBtn, setLoadMoreBtn] = useState(1)
   const [status, setStatus] = useState(false)
@@ -19,12 +20,14 @@ const Photos = ({ albumId }) => {
   //   setAlbumId(props.albumId)
   // }
 
+
   useEffect(() => {
     const limit = 10
     var apiLink
     if (typeof albumId !== "undefined") {
       setAlbumBadge(false)
       apiLink = `/albums/${albumId}/photos?_limit=${limit}&_page=${page}`
+
     } else {
       apiLink = `/photos?_limit=${limit}&_page=${page}`
     }
@@ -55,6 +58,7 @@ const Photos = ({ albumId }) => {
 
   const onClick = (e) => {
     setPage((prevPage) => prevPage + 1)
+
     setLoadMoreBtnText("Loading....")
     setLoadMoreBtnDisabled(true)
   }
