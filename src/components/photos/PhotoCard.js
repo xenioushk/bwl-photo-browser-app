@@ -7,7 +7,7 @@ const PhotoCard = (props) => {
   return (
     <>
       {!props.single ? (
-        <div className="flex flex-col justify-center bg-gray rounded shadow-md relative">
+        <div className="flex flex-col justify-center bg-gray rounded shadow-xl border relative">
           {props.albumBadge === true ? (
             <span className="text-sm transition absolute top-1 right-1 bg-primaryBlue-100 px-2 py-1 rounded text-white hover:bg-primaryBlue-500">
               <Link to={`/album/${props.photo.albumId}`} className="block">
@@ -25,12 +25,13 @@ const PhotoCard = (props) => {
         </div>
       ) : (
         <>
-          <div className="">
-            <img src={props.photo.url} alt="Logo" />
+          <div className="flex justify-center items-center py-4 ">
+            <img src={props.photo.url} alt={props.photo.title} className="block w-full rounded-xl shadow-2xl" />
           </div>
 
-          <div className="flex flex-col gap-4">
-            <h2>{props.photo.title}</h2>
+          <div className="flex flex-col gap-4 px-6 col-span-2">
+            <h2 className="text-xl font-bold">{props.photo.title}</h2>
+
             <p>
               <strong>Album:</strong> <Link to={`/album/${props.album.id}`}>{props.album.title}</Link>
             </p>
