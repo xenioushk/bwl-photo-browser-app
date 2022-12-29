@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import PhotoItem from "../photos/PhotoCard"
-import AlertMessage from "../base/AlertMessage"
 import axios from "axios"
 import loader from "../../loader.gif"
 
@@ -43,7 +42,7 @@ const SinglePhoto = () => {
   return (
     <div className="container px-4 mx-auto items-center mt-4 md:px-0">
       {isLoaded ? (
-        <div className="grid grid-cols-2 gap-y-4 mt-4">{status === true ? singlePhoto.map((photo, index) => <PhotoItem key={index} photo={photo} single={true} />) : <AlertMessage type="warning" title="No photo found!" />}</div>
+        <div className="grid grid-cols-2 gap-y-4 mt-4">{status === true ? singlePhoto.map((photo, index) => <PhotoItem key={index} photo={photo} single={true} />) : "<p>No photo found !</p>"}</div>
       ) : (
         <div className="grid justify-items-center">
           <img src={loader} alt="Logo" />

@@ -3,17 +3,22 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Header from "./components/shared/Header"
 import Footer from "./components/shared/Footer"
 
-import AllPhotos from "./components/pages/AllPhotos"
-import SinglePhoto from "./components/pages/SinglePhoto"
+// Home Page.
+const LazyAllPhotos = React.lazy(() => import("./components/pages/AllPhotos"))
+
+// SinglePhoto
+const LazySinglePhoto = React.lazy(() => import("./components/pages/SinglePhoto"))
 
 //All Albums.
 const LazyAlbums = React.lazy(() => import("./components/pages/Albums"))
+
 // Single Album.
 const LazySingleAlbum = React.lazy(() => import("./components/pages/SingleAlbum"))
 
 //About Us Page
 const LazyAboutUs = React.lazy(() => import("./components/pages/AboutUs"))
-//Terms Page.
+
+//Terms Page
 const LazyTerms = React.lazy(() => import("./components/pages/Terms"))
 
 function App() {
@@ -21,8 +26,22 @@ function App() {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<AllPhotos />} />
-        <Route path="/photo/:photoId" element={<SinglePhoto />} />
+        <Route
+          path="/"
+          element={
+            <React.Suspense fallback="Loading...">
+              <LazyAllPhotos />
+            </React.Suspense>
+          }
+        />
+        <Route
+          path="/photo/:photoId"
+          element={
+            <React.Suspense fallback="Loading...">
+              <LazySinglePhoto />
+            </React.Suspense>
+          }
+        />
         <Route
           path="/all-albums"
           element={
@@ -55,14 +74,6 @@ function App() {
             </React.Suspense>
           }
         />
-        {/* <Route path="/" element={<Home />} />
-        <Route path="/add-job" element={<AddJob />} />
-        <Route path="/job/:id" element={<SingleJob />} />
-        
-        <Route path="/search-job" element={<SearchBox />} />
-        
-        <Route path="/job/edit/:jobHash/:jobId" element={<EditJob />} />
-        <Route path="/category/:catSlug" element={<Category />} /> */}
       </Routes>
       <Footer />
     </BrowserRouter>
