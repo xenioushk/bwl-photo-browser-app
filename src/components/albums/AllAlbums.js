@@ -15,7 +15,7 @@ const AllAlbums = () => {
 
   useEffect(() => {
     const limit = 12
-    var apiLink = `http://jsonplaceholder.typicode.com/albums?_limit=${limit}&_page=${page}`
+    var apiLink = `/albums?_limit=${limit}&_page=${page}`
 
     const fetchData = () => {
       axios
@@ -40,9 +40,7 @@ const AllAlbums = () => {
   }, [page])
 
   const onClick = (e) => {
-    setPage((prev) => {
-      prev++
-    })
+    setPage((prevPage) => prevPage + 1)
     setLoadMoreBtnText("Loading....")
     setLoadMoreBtnDisabled(true)
   }
