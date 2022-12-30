@@ -1,7 +1,28 @@
 # BWL Photo Browser React Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- [Demo](https://bwl-photo-browser.netlify.app/)
 
-### Check Demo
+# Installation
 
-You can check demo in here: [https://bwl-photo-browser.netlify.app/](https://bwl-photo-browser.netlify.app/)
+- Clone the entire project.
+- Run npm install command.
+
+```bash
+  npm install
+```
+
+- It will take few minutes to install all the dependencies
+- Once installation completed, you can access the site.
+
+```bash
+  localhost:3000
+```
+
+## Acknowledgements
+
+- [reactjs](https://reactjs.org/)
+- [tailwindcss](https://tailwindcss.com/)
+- [NPM](https://www.npmjs.com/)
+- [jsonplaceholder](http://jsonplaceholder.typicode.com/)
+- [cypress](https://www.cypress.io/)
+- [postman](https://www.postman.com/)
