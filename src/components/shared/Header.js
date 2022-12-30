@@ -6,7 +6,7 @@ import logoMobile from "../../logo_mobile.png"
 const Header = () => {
   return (
     <section className="bg-Gray-100 md:p-0 shadow">
-      <nav className="relative container px-4 md:px-0 py-3 mx-auto">
+      <nav className="header-nav relative container px-4 md:px-0 py-3 mx-auto">
         <div className="flex items-center justify-between gap-y-2 md:justify-between md:flex-row gap-0">
           <Link to="/">
             <span className="text-left">

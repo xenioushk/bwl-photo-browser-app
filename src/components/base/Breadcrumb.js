@@ -5,17 +5,19 @@ import { Link } from "react-router-dom"
 const Breadcrumb = (props) => {
   return (
     <>
-      <nav className="shadow bg-Gray-100 space-y-2 border-1 border-bg-Gray-100 px-5 py-3 w-full mt-2 mb-4 rounded">
+      <nav className="app-breadcrumb shadow bg-Gray-100 space-y-2 border-1 border-bg-Gray-100 px-5 py-3 w-full mt-2 mb-4 rounded">
         <ol className="list-reset text-sm font-bold flex flex-wrap text-black">
           <li>
-            <Link to={"/"}>Home</Link>
+            <Link to={"/"} title="Home" className="home">
+              Home
+            </Link>
           </li>
 
           {props.albumCategory ? (
             <>
               <li>
                 <span className="text-gray-500 mx-1">/</span>
-                <Link to={`/all-albums/`} className="transition hover:text-primaryBlue-600" title="All Albums">
+                <Link to={`/all-albums/`} className="all-albums transition hover:text-primaryBlue-600" title="All Albums">
                   Albums
                 </Link>
               </li>
@@ -28,13 +30,13 @@ const Breadcrumb = (props) => {
             <>
               <li className="text-gray-900">
                 <span className="text-gray-500 mx-1">/</span>
-                <Link to={`/all-albums/`} className="transition hover:text-primaryBlue-600" title="All Albums">
+                <Link to={`/all-albums/`} className="all-albums transition hover:text-primaryBlue-600" title="All Albums">
                   Albums
                 </Link>
               </li>
               <li className="text-gray-900">
                 <span className="text-gray-500 mx-1">/</span>
-                <Link to={`/album/${props.album.id}`} className="transition hover:text-primaryBlue-600" title={props.album.title}>
+                <Link to={`/album/${props.album.id}`} className="album transition hover:text-primaryBlue-600" title={props.album.title}>
                   {props.album.title}
                 </Link>
               </li>
