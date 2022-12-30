@@ -17,7 +17,7 @@ const PhotoCard = (props) => {
             ""
           )}
 
-          <Link to={`/photo/${props.photo.id}`} title={props.photo.title} className="flex flex-col transition p-0 text-black-600 font-normal text-sm text-center md:font-bold text-bold hover:text-primaryBlue-500 ">
+          <Link to={`/photo/${props.photo.id}`} title={props.photo.title} className="single-photo flex flex-col transition p-0 text-black-600 font-normal text-sm text-center md:font-bold text-bold hover:text-primaryBlue-500 ">
             <img src={props.photo.thumbnailUrl} alt={props.photo.title} className="block w-full self-start" />
             <span className="p-3">{props.photo.title}</span>
           </Link>
