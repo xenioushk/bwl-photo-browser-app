@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 const Footer = () => {
   return (
     <>
-      <section className="mt-6 border-t-2 border-black-500">
+      <div className="mt-6 border-t border-black-500 shadow">
         <div className="container flex flex-col-reverse items-center justify-between mx-auto md:flex-row py-6">
           <div className="text-left md:w-1/2">
             <p>Copyright &copy; 2022-2023. All Rights Reserved.</p>
@@ -21,7 +21,7 @@ const Footer = () => {
             </Link>
           </div>
         </div>
-      </section>
+      </div>
     </>
   )
 }

@@ -53,7 +53,7 @@ const AllAlbums = () => {
         <>
           {status === true ? (
             <>
-              <div className="grid grid-cols-2 gap-4 md:grid-cols-3 gap-8 lg:grid-cols-4 xl:grid-cols-6">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 gap-8 lg:grid-cols-4 xl:grid-cols-6">
                 {albums.map((album, index) => (
                   <AlbumCard key={index} album={album} single={false} />
                 ))}

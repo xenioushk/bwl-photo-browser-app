@@ -5,7 +5,7 @@ function Page(props) {
   useEffect(() => {
     document.title = `${props.title} | Photo Browser Application`
   }, [props.title])
-  return <>{props.children}</>
+  return <div>{props.children}</div>
 }
 
 export default Page
