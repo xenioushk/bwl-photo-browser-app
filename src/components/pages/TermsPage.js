@@ -1,14 +1,9 @@
-import { useEffect } from "react"
 import Page from "./Page"
 import Breadcrumb from "../base/Breadcrumb"
 
-
 const Terms = () => {
-  useEffect(() => {
-    document.title = "Terms"
-  }, [])
   return (
-    <Page title="Terms">
+    <Page title="Terms & Conditions">
       <div className="container px-4 mx-auto items-center mt-4 md:px-0">
         <Breadcrumb title="Terms & Conditions" />
         <div className="grid grid-cols-1 gap-y-4">
@@ -20,7 +15,6 @@ const Terms = () => {
             <li>Showcase your abilities, and use the task to demonstrate your idea of best practices, regarding coding style, project structure, frameworks, patterns, design, testing etc.</li>
             <li>There is no right or wrong solution, as long as it is your solution.Be prepared to describe your work in detail.</li>
           </ol>
-
         </div>
       </div>
     </Page>

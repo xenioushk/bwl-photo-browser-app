@@ -10,13 +10,13 @@ const Footer = () => {
             <p>Copyright &copy; 2022-2023. All Rights Reserved.</p>
           </div>
           <div className="font-bold space-x-6 mb-3 md:w-1/2 text-right">
-            <Link to="/" className="transition text-gray-700 hover:text-primaryBlue-600">
+            <Link to="/" title="Home" className="transition text-gray-700 hover:text-primaryBlue-600">
               Home
             </Link>
-            <Link to="/about" className="transition text-gray-700 hover:text-primaryBlue-600">
+            <Link to="/about" title="About" className="transition text-gray-700 hover:text-primaryBlue-600">
               About
             </Link>
-            <Link to="/terms" className="transition text-gray-700 hover:text-primaryBlue-600">
+            <Link to="/terms" title="Terms & Conditions" className="transition text-gray-700 hover:text-primaryBlue-600">
               Terms
             </Link>
           </div>

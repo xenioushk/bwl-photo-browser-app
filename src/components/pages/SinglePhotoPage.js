@@ -2,6 +2,7 @@ import React from "react"
 // import useSinglePhotoData from "../hooks/UseSinglePhotoData"
 // import useSingleAlbumData from "../hooks/UseSingleAlbumData"
 // import useSingleUserData from "../hooks/UseSingleUserData"
+import Page from "./Page"
 import Breadcrumb from "../base/Breadcrumb"
 
 import { useParams } from "react-router-dom"
@@ -76,14 +77,14 @@ const SinglePhotoPage = () => {
   }
 
   return (
-    <>
+    <Page title={photoData.title}>
       <div className="container px-4 mx-auto items-center md:px-0 mt-5">
         <Breadcrumb title={photoData.title} photo={photoData} album={albumData} />
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mt-4">
           <PhotoCard key={photoId} photo={photoData} album={albumData} user={userData} single={true} />
         </div>
       </div>
-    </>
+    </Page>
   )
 }
 

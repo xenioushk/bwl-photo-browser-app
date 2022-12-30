@@ -25,6 +25,9 @@ const LazyAboutPage = React.lazy(() => import("./components/pages/AboutPage"))
 //Terms Page
 const LazyTermsPage = React.lazy(() => import("./components/pages/TermsPage"))
 
+// 404 Page.
+const LazyNotFoundPage = React.lazy(() => import("./components/pages/NotFoundPage"))
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
@@ -76,6 +79,14 @@ function App() {
             element={
               <React.Suspense fallback="">
                 <LazyTermsPage />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <React.Suspense fallback="">
+                <LazyNotFoundPage />
               </React.Suspense>
             }
           />
