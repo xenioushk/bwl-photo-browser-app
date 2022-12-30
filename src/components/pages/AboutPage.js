@@ -1,14 +1,7 @@
-import { useEffect } from "react"
 import Page from "./Page"
 import Breadcrumb from "../base/Breadcrumb"
 
-const AboutUs = () => {
-  // Use Effect.
-
-  useEffect(() => {
-    document.title = "About Application"
-  }, [])
-
+const AboutPage = () => {
   return (
     <Page title="About Us">
       <div className="container px-4 mx-auto items-center mt-4 md:px-0">
@@ -22,4 +15,4 @@ const AboutUs = () => {
   )
 }
 
-export default AboutUs
+export default AboutPage

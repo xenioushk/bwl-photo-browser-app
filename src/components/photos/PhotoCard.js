@@ -3,14 +3,13 @@ import { Link } from "react-router-dom"
 import PropTypes from "prop-types"
 
 const PhotoCard = (props) => {
-  document.title = `${props.photo.title} | Photo Browser App `
   return (
     <>
       {!props.single ? (
         <div className="flex flex-col justify-item-start bg-gray rounded shadow-xl border relative">
           {props.albumBadge === true ? (
             <span className="text-sm transition absolute top-1 right-1 bg-primaryBlue-100 px-2 py-1 rounded text-white hover:bg-primaryBlue-500">
-              <Link to={`/album/${props.photo.albumId}`} className="block">
+              <Link to={`/album/${props.photo.albumId}`} className="block" title={`Browse Album#${props.photo.albumId} Photos`}>
                 Album#{props.photo.albumId}
               </Link>
             </span>
@@ -18,7 +17,7 @@ const PhotoCard = (props) => {
             ""
           )}
 
-          <Link to={`/photo/${props.photo.id}`} className="flex flex-col transition p-0 text-black-600 font-normal text-sm text-center md:font-bold text-bold hover:text-primaryBlue-500 ">
+          <Link to={`/photo/${props.photo.id}`} title={props.photo.title} className="flex flex-col transition p-0 text-black-600 font-normal text-sm text-center md:font-bold text-bold hover:text-primaryBlue-500 ">
             <img src={props.photo.thumbnailUrl} alt={props.photo.title} className="block w-full self-start" />
             <span className="p-3">{props.photo.title}</span>
           </Link>
@@ -33,7 +32,10 @@ const PhotoCard = (props) => {
             <h2 className="text-xl font-bold">{props.photo.title}</h2>
 
             <p>
-              <strong>Album:</strong> <Link to={`/album/${props.album.id}`}>{props.album.title}</Link>
+              <strong>Album:</strong>{" "}
+              <Link to={`/album/${props.album.id}`} title={props.album.title}>
+                {props.album.title}
+              </Link>
             </p>
 
             <h3 className="text-xl font-bold border-bottom-1">Author Information:</h3>
