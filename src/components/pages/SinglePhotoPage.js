@@ -1,25 +1,24 @@
 import React from "react"
-// import useSinglePhotoData from "../hooks/UseSinglePhotoData"
-// import useSingleAlbumData from "../hooks/UseSingleAlbumData"
-// import useSingleUserData from "../hooks/UseSingleUserData"
 import Page from "./Page"
 import Breadcrumb from "../base/Breadcrumb"
 import { useParams } from "react-router-dom"
 import PhotoCard from "../photos/PhotoCard"
-import loader from "../../loader.gif"
 import { useQuery } from "react-query"
 import axios from "axios"
+import PhotoDetailSkeleton from "../skeleton/PhotoDetailSkeleton"
 
-const fetchPhoto = (photoId) => {
-  return axios.get(`/photos/${photoId}`)
+const fetchPhoto = async (photoId) => {
+  // setTimeout(() => {
+  return await axios.get(`/photos/${photoId}`)
+  // }, 50000)
 }
 
-const fetchAlbum = (albumId) => {
-  return axios.get(`/albums/${albumId}`)
+const fetchAlbum = async (albumId) => {
+  return await axios.get(`/albums/${albumId}`)
 }
 
-const fetchUser = (userId) => {
-  return axios.get(`/users/${userId}`)
+const fetchUser = async (userId) => {
+  return await axios.get(`/users/${userId}`)
 }
 
 const SinglePhotoPage = () => {
@@ -28,24 +27,18 @@ const SinglePhotoPage = () => {
   const { isLoading: aIsLoading, data: aData, isError: aIsError, error: aError } = useQuery(["my-photo", photoId], () => fetchPhoto(photoId))
   const albumId = aData?.data.albumId
   const photoData = aData?.data
-  // console.log(albumId)
+
   const { isLoading: bIsLoading, data: bData, isError: bIsError, error: bError } = useQuery(["my-album", albumId], () => fetchAlbum(albumId), { enabled: !!albumId })
-  // const { isLoading: bIsLoading, data: bData, isError: bIsError, error: bError } = useQuery(["my-album", albumId], () => fetchAlbum(albumId), { enabled: !!albumId })
   const userId = bData?.data.userId
   const albumData = bData?.data
-  // console.log(userId)
 
   const { isLoading: cIsLoading, data: cData, isError: cIsError, error: cError } = useQuery(["my-user", userId], () => fetchUser(userId), { enabled: !!userId })
-  // const { isLoading: cIsLoading, data: cData, isError: cbIsError, error: cError } = useQuery(["my-user", userId], () => fetchUser(userId), { enabled: !!userId })
-  // const userInfo = cData?.data.userId
   const userData = cData?.data
 
   if (aIsLoading || bIsLoading || cIsLoading) {
     return (
       <>
-        <div className="grid justify-items-center">
-          <img src={loader} alt="Logo" />
-        </div>
+        <PhotoDetailSkeleton count={2} />
       </>
     )
   }

@@ -78,7 +78,7 @@ const Photos = ({ albumId, albumTitle }) => {
       ) : (
         ""
       )}
-      {noPhotosDataStatus === true ? <div className="grid grid-cols-1 text-center mt-6">No more albums available !</div> : ""}
+      {noPhotosDataStatus === true ? <div className="grid grid-cols-1 text-center mt-6">No more photos available !</div> : ""}
     </div>
   )
 }
