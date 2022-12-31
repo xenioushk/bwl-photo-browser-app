@@ -1,37 +1,38 @@
 import React, { useState, useEffect } from "react"
 import AlbumCard from "./AlbumCard"
 import axios from "axios"
-import loader from "../../loader.gif"
 import Button from "../base/Button"
 import Breadcrumb from "../base/Breadcrumb"
+import AlbumSkeleton from "../skeleton/AlbumSkeleton"
 
 const AllAlbums = () => {
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [albums, setAbums] = useState([])
+  const limit = 12
+  const [skeletonStatus, setSkeletonStatus] = useState(true)
+  const [dataStatus, setDataStatus] = useState(false)
+  const [albumsData, setAlbumsData] = useState([])
+  const [noAlbumsDataStatus, setNoAlbumsDataStatus] = useState(false)
   const [page, setPage] = useState(1)
-  const [loadMoreBtn, setLoadMoreBtn] = useState(0)
-  const [status, setStatus] = useState(false)
-  const [loadMoreBtnText, setLoadMoreBtnText] = useState("Load More")
-  const [loadMoreBtnDisabled, setLoadMoreBtnDisabled] = useState(false)
+  const [loadMoreBtn, setLoadMoreBtn] = useState(false)
+  const [loadMoreBtnDisabled, setLoadMoreBtnDisabled] = useState(true)
 
   useEffect(() => {
-    const limit = 12
     var apiLink = `/albums?_limit=${limit}&_page=${page}`
 
-    const fetchData = () => {
-      axios
+    const fetchData = async () => {
+      await axios
         .get(apiLink)
         .then((res) => {
           if (res.data.length === limit) {
-            setLoadMoreBtnText("Load More")
+            setLoadMoreBtn(true)
             setLoadMoreBtnDisabled(false)
-            setIsLoaded(true)
-            setStatus(res.data.length > 0 ? true : false)
-            setLoadMoreBtn(1)
-            setAbums((prev) => prev.concat(res.data))
+            setDataStatus(true)
+            setAlbumsData((prev) => prev.concat(res.data))
+            setSkeletonStatus(false)
           } else {
             // Remove the load more button.
-            setLoadMoreBtn(0)
+            setSkeletonStatus(false)
+            setLoadMoreBtn(false)
+            setNoAlbumsDataStatus(true)
           }
         })
         .catch((err) => console.log(err))
@@ -41,43 +42,34 @@ const AllAlbums = () => {
   }, [page])
 
   const onClick = (e) => {
+    setSkeletonStatus(true)
     setPage((prevPage) => prevPage + 1)
-    setLoadMoreBtnText("Loading....")
     setLoadMoreBtnDisabled(true)
   }
 
   return (
     <div className="container px-4 mx-auto items-center md:px-0 mt-5">
       <Breadcrumb title="All Albums" />
-      {isLoaded ? (
-        <>
-          {status === true ? (
-            <>
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 gap-8 lg:grid-cols-4 xl:grid-cols-6">
-                {albums.map((album, index) => (
-                  <AlbumCard key={index} album={album} single={false} />
-                ))}
-              </div>
-
-              {loadMoreBtn ? (
-                <div className="grid grid-cols-1 gap-y-4 mt-4 text-center md:mt-6">
-                  <Button disabled={loadMoreBtnDisabled} btnText={loadMoreBtnText} onClick={onClick} />
-                </div>
-              ) : (
-                ""
-              )}
-            </>
-          ) : (
-            <>
-              <p>No Post Found !</p>
-            </>
-          )}
-        </>
-      ) : (
-        <div className="grid justify-items-center">
-          <img src={loader} alt="Logo" />
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 gap-8 lg:grid-cols-4 xl:grid-cols-6">
+        {dataStatus === true ? (
+          <>
+            {albumsData.map((album, index) => (
+              <AlbumCard key={index} album={album} />
+            ))}
+          </>
+        ) : (
+          <></>
+        )}
+        {skeletonStatus === true ? <AlbumSkeleton count={limit} /> : <></>}
+      </div>
+      {loadMoreBtn === true ? (
+        <div className="grid grid-cols-1 text-center">
+          <Button disabled={loadMoreBtnDisabled} btnText="Load More" onClick={onClick} />
         </div>
+      ) : (
+        ""
       )}
+      {noAlbumsDataStatus === true ? <div className="grid grid-cols-1 text-center mt-6">No more albums available !</div> : ""}
     </div>
   )
 }
