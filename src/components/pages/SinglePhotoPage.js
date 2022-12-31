@@ -4,11 +4,9 @@ import React from "react"
 // import useSingleUserData from "../hooks/UseSingleUserData"
 import Page from "./Page"
 import Breadcrumb from "../base/Breadcrumb"
-
 import { useParams } from "react-router-dom"
 import PhotoCard from "../photos/PhotoCard"
 import loader from "../../loader.gif"
-
 import { useQuery } from "react-query"
 import axios from "axios"
 
