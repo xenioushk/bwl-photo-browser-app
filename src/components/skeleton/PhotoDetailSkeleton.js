@@ -15,10 +15,10 @@ function PhotoDetailSkeleton() {
           </div>
           <div className="flex flex-col gap-4 px-1 mt-4 md:mt-0 md:px-6 md:col-span-1 xl:col-span-2">
             <h2 className="text-xl font-bold">
-              <Skeleton />
+              <Skeleton width={300} height={10} borderRadius={0} inline={1} />
             </h2>
             <p>
-              <Skeleton />
+              <Skeleton width={200} height={10} borderRadius={0} inline={1} />
             </p>
 
             <h3 className="text-xl font-bold border-bottom-1">Author Information:</h3>

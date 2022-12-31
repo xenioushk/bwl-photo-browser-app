@@ -6,7 +6,7 @@ import Breadcrumb from "../base/Breadcrumb"
 import PhotoSkeleton from "../skeleton/PhotoSkeleton"
 
 const Photos = ({ albumId, albumTitle }) => {
-  const limit = 12
+  const limit = 18
   const [skeletonStatus, setSkeletonStatus] = useState(true)
   const [dataStatus, setDataStatus] = useState(false)
   const [photosData, setPhotosData] = useState([])
@@ -58,7 +58,7 @@ const Photos = ({ albumId, albumTitle }) => {
     <div className="container px-4 mx-auto items-center md:px-0 mt-5">
       {albumTitle ? <Breadcrumb albumCategory="All Albums" title={albumTitle} /> : <></>}
 
-      <div className="grid grid-cols-1 gap-4 px-0 sm:grid-cols-2 md:grid-cols-3 md:p-0 lg:grid-cols-4 gap-6 xl:grid-cols-5 gap-6 ">
+      <div className="grid grid-cols-1 gap-4 px-0 sm:grid-cols-2 md:grid-cols-3 md:p-0 lg:grid-cols-4 gap-6 xl:grid-cols-6">
         {dataStatus === true ? (
           <>
             {photosData.map((photo, index) => (

@@ -6,7 +6,7 @@ import Breadcrumb from "../base/Breadcrumb"
 import AlbumSkeleton from "../skeleton/AlbumSkeleton"
 
 const AllAlbums = () => {
-  const limit = 12
+  const limit = 18
   const [skeletonStatus, setSkeletonStatus] = useState(true)
   const [dataStatus, setDataStatus] = useState(false)
   const [albumsData, setAlbumsData] = useState([])

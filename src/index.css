@@ -7,3 +7,12 @@
     font-family: Proxima Nova, system-ui, sans-serif;
   }
 }
+
+.preloader {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.8);
+}
