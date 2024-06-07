@@ -1,7 +1,7 @@
 describe("app e2e test", () => {
   it("End user load the site.", () => {
     /*-- Test Plan --*/
-
+    //npx cypress open
     /*1 Home Page*/
     // 1.1 Visit the app Home Page. (x)
     // 1.2 Click the "Load more" button.
