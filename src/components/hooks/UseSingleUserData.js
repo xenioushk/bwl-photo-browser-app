@@ -1,4 +1,4 @@
-import { useQuery } from "react-query"
+import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 
 const fetchUser = (userId) => {
@@ -6,7 +6,9 @@ const fetchUser = (userId) => {
 }
 
 const useSingleUserData = ({ onSuccess, onError, userId }) => {
-  return useQuery(["single-user", userId], () => fetchUser(userId), {
+  return useQuery({
+    queryKey: ["single-user", userId],
+    queryFn: () => fetchUser(userId),
     onSuccess,
     onError,
   })

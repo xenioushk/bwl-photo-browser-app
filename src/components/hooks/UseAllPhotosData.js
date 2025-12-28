@@ -1,4 +1,4 @@
-import { useQuery } from "react-query"
+import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 
 const fetchAllPhoto = () => {
@@ -7,7 +7,9 @@ const fetchAllPhoto = () => {
 
 const useAllPhotosData = (params) => {
   const { onSuccess, onError, photoId } = params
-  return useQuery("single-photo", fetchAllPhoto, {
+  return useQuery({
+    queryKey: ["single-photo"],
+    queryFn: fetchAllPhoto,
     // cacheTime: 5000, // 5 second
     // staleTime: 30000,
     // refetchOnMount: true, // default true

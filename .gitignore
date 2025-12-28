@@ -30,6 +30,9 @@ build
 
 *.code-workspace
 
+MODERNIZATION_PLAN.md
+CHANGELOG.md
+
 #Ignore page.
 
 /src/components/pages/parallal_query.AboutUsPage.js

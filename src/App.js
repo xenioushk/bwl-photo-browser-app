@@ -1,6 +1,6 @@
 import React from "react"
-import { QueryClientProvider, QueryClient } from "react-query"
-import { ReactQueryDevtools } from "react-query/devtools"
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query"
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Header from "./components/shared/Header"
 import Footer from "./components/shared/Footer"
