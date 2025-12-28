@@ -4,6 +4,7 @@
 
 [![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://bwl-photo-browser.netlify.app/)
 [![React](https://img.shields.io/badge/React-18.2.0-blue)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-4.9.5-blue)](https://www.typescriptlang.org/)
 [![TanStack Query](https://img.shields.io/badge/TanStack%20Query-v5-red)](https://tanstack.com/query/latest)
 [![Node.js](https://img.shields.io/badge/Node.js-22.x-green)](https://nodejs.org/)
 
@@ -47,6 +48,7 @@ A high-performance, enterprise-grade photo browser application demonstrating mod
 ### **Core Technologies**
 
 - **React 18.2.0** - Modern component architecture with Hooks
+- **TypeScript 4.9.5** - Type-safe development with strict mode
 - **TanStack Query v5** - Powerful async state management
 - **React Router v6** - Client-side routing with lazy loading
 - **Axios** - HTTP client for API requests
