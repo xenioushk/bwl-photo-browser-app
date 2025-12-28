@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Header from "./components/shared/Header"
 import Footer from "./components/shared/Footer"
 import Preloader from "./components/base/Preloader"
+import ErrorBoundary from "./components/base/ErrorBoundary"
 
 const queryClient = new QueryClient()
 
@@ -31,71 +32,75 @@ const LazyNotFoundPage = React.lazy(() => import("./components/pages/NotFoundPag
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <Router>
-        <Header />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <React.Suspense fallback=<Preloader />>
-                <LazyAllPhotosPage />
-              </React.Suspense>
-            }
-          />
-          <Route
-            path="/photo/:photoId"
-            element={
-              <React.Suspense fallback=<Preloader />>
-                <LazySinglePhotoPage />
-              </React.Suspense>
-            }
-          />
-          <Route
-            path="/all-albums"
-            element={
-              <React.Suspense fallback=<Preloader />>
-                <LazyAlbumsPage />
-              </React.Suspense>
-            }
-          />
-          <Route
-            path="/album/:albumId"
-            element={
-              <React.Suspense fallback=<Preloader />>
-                <LazySingleAlbumPage />
-              </React.Suspense>
-            }
-          />
-          <Route
-            path="/about"
-            element={
-              <React.Suspense fallback=<Preloader />>
-                <LazyAboutPage />
-              </React.Suspense>
-            }
-          />
-          <Route
-            path="/terms"
-            element={
-              <React.Suspense fallback=<Preloader />>
-                <LazyTermsPage />
-              </React.Suspense>
-            }
-          />
-          <Route
-            path="*"
-            element={
-              <React.Suspense fallback=<Preloader />>
-                <LazyNotFoundPage />
-              </React.Suspense>
-            }
-          />
-        </Routes>
-        <Footer />
-      </Router>
-      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
-    </QueryClientProvider>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <Header />
+          <ErrorBoundary>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <React.Suspense fallback=<Preloader />>
+                    <LazyAllPhotosPage />
+                  </React.Suspense>
+                }
+              />
+              <Route
+                path="/photo/:photoId"
+                element={
+                  <React.Suspense fallback=<Preloader />>
+                    <LazySinglePhotoPage />
+                  </React.Suspense>
+                }
+              />
+              <Route
+                path="/all-albums"
+                element={
+                  <React.Suspense fallback=<Preloader />>
+                    <LazyAlbumsPage />
+                  </React.Suspense>
+                }
+              />
+              <Route
+                path="/album/:albumId"
+                element={
+                  <React.Suspense fallback=<Preloader />>
+                    <LazySingleAlbumPage />
+                  </React.Suspense>
+                }
+              />
+              <Route
+                path="/about"
+                element={
+                  <React.Suspense fallback=<Preloader />>
+                    <LazyAboutPage />
+                  </React.Suspense>
+                }
+              />
+              <Route
+                path="/terms"
+                element={
+                  <React.Suspense fallback=<Preloader />>
+                    <LazyTermsPage />
+                  </React.Suspense>
+                }
+              />
+              <Route
+                path="*"
+                element={
+                  <React.Suspense fallback=<Preloader />>
+                    <LazyNotFoundPage />
+                  </React.Suspense>
+                }
+              />
+            </Routes>
+          </ErrorBoundary>
+          <Footer />
+        </Router>
+        <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+      </QueryClientProvider>
+    </ErrorBoundary>
   )
 }
 
