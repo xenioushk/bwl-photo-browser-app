@@ -10,12 +10,6 @@ const useSinglePhotoData = ({ photoId }) => {
     queryKey: ["single-photo", photoId],
     queryFn: () => fetchSinglePhoto(photoId),
   })
-  // return useQuery({
-  //   queryKey: ["single-photo", photoId],
-  //   queryFn: () => fetchSinglePhoto(photoId),
-  //   onSuccess,
-  //   onError,
-  // })
 }
 
 export default useSinglePhotoData

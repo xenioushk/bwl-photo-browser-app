@@ -6,18 +6,11 @@ const fetchAllPhoto = () => {
 }
 
 const useAllPhotosData = (params) => {
-  const { onSuccess, onError, photoId } = params
+  const { onSuccess, onError } = params
   return useQuery({
     queryKey: ["single-photo"],
     queryFn: fetchAllPhoto,
-    // cacheTime: 5000, // 5 second
-    // staleTime: 30000,
-    // refetchOnMount: true, // default true
-    // refetchOnWindowFocus: true,
-    // refetchInterval: 3000, // polling interval
-    // refetchIntervalInBackground: true // fetch data in background
-
-    enabled: false, // disable fetching data on mount.
+    enabled: false,
     onSuccess,
     onError,
   })
