@@ -28,6 +28,8 @@ build
 
 .VSCodeCounter
 
+*.code-workspace
+
 #Ignore page.
 
 /src/components/pages/parallal_query.AboutUsPage.js
