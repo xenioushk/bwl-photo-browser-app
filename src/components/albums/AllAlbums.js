@@ -35,7 +35,10 @@ const AllAlbums = () => {
             setNoAlbumsDataStatus(true)
           }
         })
-        .catch((err) => console.log(err))
+        .catch((err) => {
+          setSkeletonStatus(false)
+          setLoadMoreBtn(false)
+        })
     }
 
     fetchData()

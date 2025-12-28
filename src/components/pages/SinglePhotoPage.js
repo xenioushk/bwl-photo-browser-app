@@ -8,9 +8,7 @@ import axios from "axios"
 import PhotoDetailSkeleton from "../skeleton/PhotoDetailSkeleton"
 
 const fetchPhoto = async (photoId) => {
-  // setTimeout(() => {
   return await axios.get(`/photos/${photoId}`)
-  // }, 50000)
 }
 
 const fetchAlbum = async (albumId) => {

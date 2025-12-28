@@ -42,7 +42,10 @@ const Photos = ({ albumId, albumTitle }) => {
             setNoPhotosDataStatus(true)
           }
         })
-        .catch((err) => console.log(err))
+        .catch((err) => {
+          setSkeletonStatus(false)
+          setLoadMoreBtn(false)
+        })
     }
 
     fetchData()
