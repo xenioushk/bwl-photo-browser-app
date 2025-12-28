@@ -3,7 +3,7 @@ import Page from "./Page"
 import Breadcrumb from "../base/Breadcrumb"
 import { useParams } from "react-router-dom"
 import PhotoCard from "../photos/PhotoCard"
-import { useQuery } from "react-query"
+import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import PhotoDetailSkeleton from "../skeleton/PhotoDetailSkeleton"
 
@@ -24,15 +24,41 @@ const fetchUser = async (userId) => {
 const SinglePhotoPage = () => {
   const { photoId } = useParams() // get ID from url
 
-  const { isLoading: aIsLoading, data: aData, isError: aIsError, error: aError } = useQuery(["my-photo", photoId], () => fetchPhoto(photoId))
+  const {
+    isLoading: aIsLoading,
+    data: aData,
+    isError: aIsError,
+    error: aError,
+  } = useQuery({
+    queryKey: ["my-photo", photoId],
+    queryFn: () => fetchPhoto(photoId),
+  })
   const albumId = aData?.data.albumId
   const photoData = aData?.data
 
-  const { isLoading: bIsLoading, data: bData, isError: bIsError, error: bError } = useQuery(["my-album", albumId], () => fetchAlbum(albumId), { enabled: !!albumId })
+  const {
+    isLoading: bIsLoading,
+    data: bData,
+    isError: bIsError,
+    error: bError,
+  } = useQuery({
+    queryKey: ["my-album", albumId],
+    queryFn: () => fetchAlbum(albumId),
+    enabled: !!albumId,
+  })
   const userId = bData?.data.userId
   const albumData = bData?.data
 
-  const { isLoading: cIsLoading, data: cData, isError: cIsError, error: cError } = useQuery(["my-user", userId], () => fetchUser(userId), { enabled: !!userId })
+  const {
+    isLoading: cIsLoading,
+    data: cData,
+    isError: cIsError,
+    error: cError,
+  } = useQuery({
+    queryKey: ["my-user", userId],
+    queryFn: () => fetchUser(userId),
+    enabled: !!userId,
+  })
   const userData = cData?.data
 
   if (aIsLoading || bIsLoading || cIsLoading) {

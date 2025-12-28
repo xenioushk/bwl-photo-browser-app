@@ -1,4 +1,4 @@
-import { useQuery } from "react-query"
+import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 
 const fetchAlbum = (albumId) => {
@@ -6,7 +6,9 @@ const fetchAlbum = (albumId) => {
 }
 
 const useSingleAlbumData = ({ onSuccess, onError, albumId }) => {
-  return useQuery(["single-album", albumId], () => fetchAlbum(albumId), {
+  return useQuery({
+    queryKey: ["single-album", albumId],
+    queryFn: () => fetchAlbum(albumId),
     onSuccess,
     onError,
   })

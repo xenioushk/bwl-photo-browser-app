@@ -1,4 +1,4 @@
-import { useQuery } from "react-query"
+import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 
 const fetchSinglePhoto = (photoId) => {
@@ -6,8 +6,13 @@ const fetchSinglePhoto = (photoId) => {
 }
 
 const useSinglePhotoData = ({ photoId }) => {
-  return useQuery(["single-photo", photoId], () => fetchSinglePhoto(photoId))
-  // return useQuery(["single-photo", photoId], () => fetchSinglePhoto(photoId), {
+  return useQuery({
+    queryKey: ["single-photo", photoId],
+    queryFn: () => fetchSinglePhoto(photoId),
+  })
+  // return useQuery({
+  //   queryKey: ["single-photo", photoId],
+  //   queryFn: () => fetchSinglePhoto(photoId),
   //   onSuccess,
   //   onError,
   // })
