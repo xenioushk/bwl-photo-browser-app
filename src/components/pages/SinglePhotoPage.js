@@ -20,46 +20,46 @@ const fetchUser = async (userId) => {
 }
 
 const SinglePhotoPage = () => {
-  const { photoId } = useParams() // get ID from url
+  const { photoId } = useParams()
 
   const {
-    isLoading: aIsLoading,
-    data: aData,
-    isError: aIsError,
-    error: aError,
+    isLoading: isPhotoLoading,
+    data: photoResponse,
+    isError: isPhotoError,
+    error: photoError,
   } = useQuery({
     queryKey: ["my-photo", photoId],
     queryFn: () => fetchPhoto(photoId),
   })
-  const albumId = aData?.data.albumId
-  const photoData = aData?.data
+  const albumId = photoResponse?.data.albumId
+  const photoData = photoResponse?.data
 
   const {
-    isLoading: bIsLoading,
-    data: bData,
-    isError: bIsError,
-    error: bError,
+    isLoading: isAlbumLoading,
+    data: albumResponse,
+    isError: isAlbumError,
+    error: albumError,
   } = useQuery({
     queryKey: ["my-album", albumId],
     queryFn: () => fetchAlbum(albumId),
     enabled: !!albumId,
   })
-  const userId = bData?.data.userId
-  const albumData = bData?.data
+  const userId = albumResponse?.data.userId
+  const albumData = albumResponse?.data
 
   const {
-    isLoading: cIsLoading,
-    data: cData,
-    isError: cIsError,
-    error: cError,
+    isLoading: isUserLoading,
+    data: userResponse,
+    isError: isUserError,
+    error: userError,
   } = useQuery({
     queryKey: ["my-user", userId],
     queryFn: () => fetchUser(userId),
     enabled: !!userId,
   })
-  const userData = cData?.data
+  const userData = userResponse?.data
 
-  if (aIsLoading || bIsLoading || cIsLoading) {
+  if (isPhotoLoading || isAlbumLoading || isUserLoading) {
     return (
       <>
         <PhotoDetailSkeleton count={2} />
@@ -67,26 +67,35 @@ const SinglePhotoPage = () => {
     )
   }
 
-  if (aIsError) {
+  if (isPhotoError) {
     return (
       <>
-        <div className="grid justify-items-center">{aError.message}</div>
+        <div className="grid justify-items-center">{photoError.message}</div>
       </>
     )
   }
 
-  if (bIsError) {
+  if (isAlbumError) {
     return (
       <>
-        <div className="grid justify-items-center">{bError.message}</div>
+        <div className="grid justify-items-center">{albumError.message}</div>
       </>
     )
   }
 
-  if (cIsError) {
+  if (isUserError) {
     return (
       <>
-        <div className="grid justify-items-center">{cError.message}</div>
+        <div className="grid justify-items-center">{userError.message}</div>
+      </>
+    )
+  }
+
+  // Ensure all data is loaded before rendering
+  if (!photoData || !albumData || !userData) {
+    return (
+      <>
+        <PhotoDetailSkeleton count={2} />
       </>
     )
   }

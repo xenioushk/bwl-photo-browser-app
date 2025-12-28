@@ -3,6 +3,11 @@ import { Link } from "react-router-dom"
 import PropTypes from "prop-types"
 
 const PhotoCard = (props) => {
+  const handleImageError = (e) => {
+    // Fallback to a solid color placeholder when image fails to load
+    e.target.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Crect width='600' height='600' fill='%23${props.photo.id ? (props.photo.id * 123456).toString(16).slice(0, 6) : "cccccc"}'/%3E%3Ctext x='50%25' y='50%25' font-size='24' fill='white' text-anchor='middle' dominant-baseline='middle'%3EPhoto ${props.photo.id}%3C/text%3E%3C/svg%3E`
+  }
+
   return (
     <>
       {!props.single ? (
@@ -18,14 +23,14 @@ const PhotoCard = (props) => {
           )}
 
           <Link to={`/photo/${props.photo.id}`} title={props.photo.title} className="single-photo flex flex-col transition p-0 text-black-600 font-normal text-sm text-center md:font-bold text-bold hover:text-primaryBlue-500 ">
-            <img src={props.photo.thumbnailUrl} alt={props.photo.title} className="block w-full self-start" />
+            <img src={props.photo.thumbnailUrl} alt={props.photo.title} className="block w-full self-start" onError={handleImageError} />
             <span className="p-3">{props.photo.title}</span>
           </Link>
         </div>
       ) : (
         <>
           <div className="flex justify-center items-start py-0 ">
-            <img src={props.photo.url} alt={props.photo.title} className="block w-full rounded-xl shadow-2xl" />
+            <img src={props.photo.url} alt={props.photo.title} className="block w-full rounded-xl shadow-2xl" onError={handleImageError} />
           </div>
 
           <div className="flex flex-col gap-4 px-1 mt-4 md:mt-0 md:px-6 md:col-span-1 xl:col-span-2">
