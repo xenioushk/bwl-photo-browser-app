@@ -1,78 +1,56 @@
 import React, { useState, useEffect } from "react"
 import AlbumCard from "./AlbumCard"
-import axios from "axios"
 import Button from "../base/Button"
 import Breadcrumb from "../base/Breadcrumb"
 import AlbumSkeleton from "../skeleton/AlbumSkeleton"
+import useAlbums from "../hooks/useAlbums"
 
 const AllAlbums = () => {
   const limit = 18
-  const [skeletonStatus, setSkeletonStatus] = useState(true)
-  const [dataStatus, setDataStatus] = useState(false)
-  const [albumsData, setAlbumsData] = useState([])
-  const [noAlbumsDataStatus, setNoAlbumsDataStatus] = useState(false)
   const [page, setPage] = useState(1)
-  const [loadMoreBtn, setLoadMoreBtn] = useState(false)
-  const [loadMoreBtnDisabled, setLoadMoreBtnDisabled] = useState(true)
+  const [allAlbums, setAllAlbums] = useState([])
 
+  const { data, isLoading, isError, error } = useAlbums(page, limit)
+
+  // Accumulate albums as we load more pages
   useEffect(() => {
-    var apiLink = `/albums?_limit=${limit}&_page=${page}`
-
-    const fetchData = async () => {
-      await axios
-        .get(apiLink)
-        .then((res) => {
-          if (res.data.length === limit) {
-            setLoadMoreBtn(true)
-            setLoadMoreBtnDisabled(false)
-            setDataStatus(true)
-            setAlbumsData((prev) => prev.concat(res.data))
-            setSkeletonStatus(false)
-          } else {
-            // Remove the load more button.
-            setSkeletonStatus(false)
-            setLoadMoreBtn(false)
-            setNoAlbumsDataStatus(true)
-          }
-        })
-        .catch((err) => {
-          setSkeletonStatus(false)
-          setLoadMoreBtn(false)
-        })
+    if (data && data.length > 0) {
+      setAllAlbums((prev) => [...prev, ...data])
     }
+  }, [data])
 
-    fetchData()
-  }, [page])
+  const hasMore = data && data.length === limit
+  const showLoadMore = !isLoading && hasMore
+  const noMoreAlbums = !isLoading && data && data.length < limit && allAlbums.length > 0
 
-  const onClick = (e) => {
-    setSkeletonStatus(true)
+  const handleLoadMore = () => {
     setPage((prevPage) => prevPage + 1)
-    setLoadMoreBtnDisabled(true)
+  }
+
+  if (isError) {
+    return (
+      <div className="container px-4 mx-auto items-center md:px-0 mt-5">
+        <Breadcrumb title="All Albums" />
+        <div className="grid justify-items-center mt-8 text-red-600">Error loading albums: {error.message}</div>
+      </div>
+    )
   }
 
   return (
     <div className="container px-4 mx-auto items-center md:px-0 mt-5">
       <Breadcrumb title="All Albums" />
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 gap-8 lg:grid-cols-4 xl:grid-cols-6">
-        {dataStatus === true ? (
-          <>
-            {albumsData.map((album, index) => (
-              <AlbumCard key={index} album={album} />
-            ))}
-          </>
-        ) : (
-          <></>
-        )}
-        {skeletonStatus === true ? <AlbumSkeleton count={limit} /> : <></>}
+        {allAlbums.map((album, index) => (
+          <AlbumCard key={album.id || index} album={album} />
+        ))}
+        {isLoading && <AlbumSkeleton count={limit} />}
       </div>
-      {loadMoreBtn === true ? (
+      {showLoadMore && (
         <div className="grid grid-cols-1 text-center">
-          <Button disabled={loadMoreBtnDisabled} btnText="Load More" onClick={onClick} />
+          <Button disabled={isLoading} btnText="Load More" onClick={handleLoadMore} />
         </div>
-      ) : (
-        ""
       )}
-      {noAlbumsDataStatus === true ? <div className="grid grid-cols-1 text-center mt-6">No more albums available !</div> : ""}
+      {noMoreAlbums && <div className="grid grid-cols-1 text-center mt-6">No more albums available!</div>}
     </div>
   )
 }
